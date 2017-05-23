@@ -1,6 +1,7 @@
 package com.cag.spring_boot_mybatis_demo;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cag.spring_boot_mybatis_demo.domain.User;
+import com.cag.spring_boot_mybatis_demo.domain.UserMapper;
 
 //写了 @RestController，就不用写 @Controller 和 下面每个路由的 @ResponseBody 了。 @RestController = @Controller + @ResponseBody。
 //@RestController
@@ -24,6 +28,18 @@ public class Application {
 	@ResponseBody
 	String home() {
 		return "Hello World!";
+	}
+	
+	@Autowired
+	UserMapper userMapper;
+	
+	@RequestMapping("/user")
+	@ResponseBody
+	String user() {
+		userMapper.insert("AAA", 30);
+		User user = userMapper.findByName("AAA");
+		System.out.println(user.getName());
+		return user.getName();
 	}
 	
 	public static void main(String[] args) {
