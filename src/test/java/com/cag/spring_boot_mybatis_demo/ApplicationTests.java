@@ -14,21 +14,18 @@ import com.cag.spring_boot_mybatis_demo.domain.UserMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
+// 表示所有类下所有方法都使用事物
 @Transactional
 public class ApplicationTests {
 	@Autowired
 	private UserMapper userMapper;
 
 	@Test
+	// 数据会回滚
 	@Rollback
 	public void findByName() throws Exception {
-		System.out.println("test");
 		userMapper.insert("AAA", 20);
 		User u = userMapper.findByName("AAA");
-		System.out.println("User u=");
-		System.out.println(u.getName());
-		System.out.println(u.getAge());
-		System.out.println(u.getId());
 		Assert.assertEquals(20, u.getAge().intValue());
 	}
 }
