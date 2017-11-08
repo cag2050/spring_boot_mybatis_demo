@@ -1,4 +1,7 @@
-1. 在 pom.xml 添加相应的内容；  
+* 使用了 eclipse IDE  
+
+### 步骤
+1. 在 pom.xml 添加相应的内容；  
 1. 在 application.properties 中配置数据库相关信息；  
 1. 在 mysql 建库和建表；  
 1. 写 User.java 和 UserMapper.java;  
